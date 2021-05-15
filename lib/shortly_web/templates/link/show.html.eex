@@ -1,0 +1,18 @@
+<h1>Show Link</h1>
+
+<ul>
+
+  <li>
+    <strong>Url:</strong>
+    <%= @link.url %>
+  </li>
+
+  <li>
+    <strong>Slug:</strong>
+    <%= @link.slug %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.link_path(@conn, :edit, @link) %></span>
+<span><%= link "Back", to: Routes.link_path(@conn, :index) %></span>
