@@ -11,14 +11,7 @@
 <% end %>
 
 <table>
-  <thead>
-    <tr>
-      <th>Url</th>
-      <th>Slug</th>
 
-      <th></th>
-    </tr>
-  </thead>
   <tbody>
 
 

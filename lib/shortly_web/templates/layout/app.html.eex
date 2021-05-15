@@ -10,14 +10,13 @@
   </head>
   <body>
     <header>
-      <section class="container">
-        <nav role="navigation">
-        </nav>
-        <a href="https://phoenixframework.org/" class="phx-logo">
-          <img src="<%= Routes.static_path(@conn, "/images/phoenix.png") %>" alt="Phoenix Framework Logo"/>
-        </a>
-      </section>
-    </header>k
+      <div class="container">
+          <img class="float-left" src="<%= Routes.static_path(@conn, "/images/shorts.jpeg") %>" alt="Shortly Logo"/>
+          <p class="text-5xl">Do you wish your links were shorter?</p>
+
+
+      </div>
+    </header>
     <main role="main" class="container">
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
