@@ -15,5 +15,6 @@ defmodule Shortly.Shortener.Link do
     |> cast(attrs, [:url, :slug])
     |> validate_required([:url, :slug])
     |> unique_constraint(:slug)
+    |> validate_length(:slug, min: 4)
   end
 end

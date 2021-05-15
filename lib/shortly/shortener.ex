@@ -18,7 +18,9 @@ defmodule Shortly.Shortener do
 
   """
   def list_links do
-    Repo.all(Link)
+    query = from l in Link, order_by: [desc: :updated_at]
+
+    Repo.all(query)
   end
 
   @doc """
@@ -38,7 +40,7 @@ defmodule Shortly.Shortener do
   def get_link!(id), do: Repo.get!(Link, id)
 
   @doc """
-  Creates a link.
+  Creates a link. If the slug is not provided, generate a random one
 
   ## Examples
 
@@ -49,6 +51,11 @@ defmodule Shortly.Shortener do
       {:error, %Ecto.Changeset{}}
 
   """
+  def create_link(%{"url" => url, "slug" => ""} = attrs) do
+    Map.put(attrs, "slug", generate_slug())
+    |> create_link()
+  end
+
   def create_link(attrs \\ %{}) do
     %Link{}
     |> Link.changeset(attrs)
@@ -100,5 +107,16 @@ defmodule Shortly.Shortener do
   """
   def change_link(%Link{} = link, attrs \\ %{}) do
     Link.changeset(link, attrs)
+  end
+
+  def generate_slug() do
+    min = String.to_integer("100000", 36)
+    max = String.to_integer("ZZZZZZ", 36)
+  
+    max
+    |> Kernel.-(min)
+    |> :rand.uniform()
+    |> Kernel.+(min)
+    |> Integer.to_string(36)
   end
 end
