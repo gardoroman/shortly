@@ -6,7 +6,9 @@ defmodule ShortlyWeb.LinkController do
 
   def index(conn, _params) do
     links = Shortener.list_links()
-    render(conn, "index.html", links: links)
+    changeset = Link.changeset(%Link{}, %{})
+
+    render(conn, "index.html", links: links, changeset: changeset)
   end
 
   def new(conn, _params) do
@@ -19,7 +21,7 @@ defmodule ShortlyWeb.LinkController do
       {:ok, link} ->
         conn
         |> put_flash(:info, "Link created successfully.")
-        |> redirect(to: Routes.link_path(conn, :show, link))
+        |> redirect(to: Routes.link_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)

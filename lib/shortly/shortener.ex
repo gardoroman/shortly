@@ -56,7 +56,8 @@ defmodule Shortly.Shortener do
     |> create_link()
   end
 
-  def create_link(attrs \\ %{}) do
+  def create_link(%{"slug" => slug} = attrs) do
+    attrs = Map.put(attrs, "slug", "localhost:4000/links/#{slug}")
     %Link{}
     |> Link.changeset(attrs)
     |> Repo.insert()
