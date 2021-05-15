@@ -17,7 +17,7 @@ defmodule ShortlyWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
-    resources "/links", LinkController
+    resources "/links", LinkController, only: [:index, :create]
   end
 
   # Other scopes may use custom stacks.

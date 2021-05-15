@@ -16,4 +16,5 @@ You can also run your app inside IEx (Interactive Elixir) as:
 
     $ iex -S mix phx.server
 
-mix phx.gen.html Shortener Link links url:string slug:string:unique
+
+
