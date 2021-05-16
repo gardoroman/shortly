@@ -15,7 +15,6 @@ import "../css/app.css";
 //
 import "phoenix_html";
 
-
 const buttons = document.getElementsByClassName('copy-button');
 
 const setClipboard = text =>  {
@@ -33,14 +32,11 @@ const setClipboard = text =>  {
 
     });
 };
-  
 
-const handleClickEvent = event => {
-    
+const handleClickEvent = event => {  
     let shortenedUrl = event.currentTarget.parentNode.previousElementSibling.innerText;
-    console.log(shortenedUrl)
-    setClipboard(shortenedUrl)
-}
+    setClipboard(shortenedUrl);
+};
 
 Array.from(buttons).forEach( button => {
     button.addEventListener('click', handleClickEvent);
