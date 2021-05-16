@@ -13,4 +13,36 @@ import "../css/app.css";
 //     import {Socket} from "phoenix"
 //     import socket from "./socket"
 //
-import "phoenix_html"
+import "phoenix_html";
+
+
+const buttons = document.getElementsByClassName('copy-button');
+
+const setClipboard = text =>  {
+    const type = 'text/plain';
+    const blob = new Blob([text], { type });
+    const data = [new ClipboardItem({ [type]: blob })];
+  
+    navigator.clipboard.write(data).then(function() {
+      /* success */
+      console.log('clickboard copied')
+
+    }, function() {
+      /* failure */
+      console.log('copy to clipboard failed')
+
+    });
+};
+  
+
+const handleClickEvent = event => {
+    
+    let shortenedUrl = event.currentTarget.parentNode.previousElementSibling.innerText;
+    console.log(shortenedUrl)
+    setClipboard(shortenedUrl)
+}
+
+Array.from(buttons).forEach( button => {
+    button.addEventListener('click', handleClickEvent);
+});
+

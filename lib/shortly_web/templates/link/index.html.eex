@@ -21,7 +21,7 @@
       <td><%= link.hostname <> link.slug %></td>
 
       <td>
-        <button class="button"> Copy</button>
+        <button class="button copy-button"> Copy</button>
       </td>
     </tr>
 <% end %>
