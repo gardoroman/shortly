@@ -9,19 +9,34 @@
     <script defer type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   </head>
   <body>
-    <header>
-      <div class="container">
-          <img class="float-left" src="<%= Routes.static_path(@conn, "/images/shorts.jpeg") %>" alt="Shortly Logo"/>
-          <p class="text-5xl">Do you wish your links were shorter?</p>
-
-
+    <nav class="flex items-center justify-between flex-wrap bg-gray-600 p-6">
+      <div class="flex items-center flex-shrink-0 text-white mr-6">
+        <span class="font-bold text-6xl mx-4">Shortly</span>
       </div>
-    </header>
-    <main role="main" class="container">
+    </nav>
+    
+    <div class="container mx-auto p-20">
+        <p class="text-5xl">Do you wish your links were shorter?</p>
+    </div>
+
+    <div class="container mx-auto p-20">
+      <div class="flex flex-wrap content-start">
+        <div>Go from this.</div>
+        <div>
+          <img class="float-left" src="<%= Routes.static_path(@conn, "/images/pants.jpg") %>" alt="Shortly Logo"/>
+        </div>
+        <div>To this! Courtesy of Shortly</div>
+        <div>
+          <img class="float-left" src="<%= Routes.static_path(@conn, "/images/shorts.jpeg") %>" alt="Shortly Logo"/>
+        </div>
+      
+      </div>
+    </div>
+    
+    <main role="main" class="container bg-white">
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
       <%= @inner_content %>
     </main>
   </body>
 </html>
-k

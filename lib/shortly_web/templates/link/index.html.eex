@@ -13,18 +13,16 @@
 <table>
 
   <tbody>
+    <%= for link <- @links do %>
+        <tr>
+          <td><%= link.url %></td>
+          <td><%= link.hostname <> link.slug %></td>
 
-
-<%= for link <- @links do %>
-    <tr>
-      <td><%= link.url %></td>
-      <td><%= link.hostname <> link.slug %></td>
-
-      <td>
-        <button class="button copy-button"> Copy</button>
-      </td>
-    </tr>
-<% end %>
+          <td>
+            <button class="button copy-button"> Copy</button>
+          </td>
+        </tr>
+    <% end %>
   </tbody>
 </table>
 
