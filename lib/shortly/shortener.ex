@@ -30,14 +30,34 @@ defmodule Shortly.Shortener do
 
   ## Examples
 
-      iex> get_link!(123)
+      iex> get_link("slug")
       %Link{}
 
-      iex> get_link!(456)
-      ** (Ecto.NoResultsError)
+      iex> get_link("bad")
+      nil
 
   """
-  def get_link!(id), do: Repo.get!(Link, id)
+  def get_link(slug), do: Repo.get_by(Link, [slug: slug])
+
+  def get_valid_url(nil), do: {:error, "Link not found."}
+  def get_valid_url(url) do
+    url = check_for_protocol(url)
+    {:ok, url}
+  end
+
+  #-----------------------------------------------------------------
+  # Check for for http or https protocol in url 
+  # and prefixes "http://" if missing.
+  #-----------------------------------------------------------------
+
+  defp check_for_protocol(url) do
+    reg = ~r/^https?:\/\//
+    if Regex.match?(reg, url) do
+      url
+    else
+      "http://" <> url
+    end
+  end
 
   @doc """
   Creates a link. If the slug is not provided, generate a random one
@@ -56,8 +76,10 @@ defmodule Shortly.Shortener do
     |> create_link()
   end
 
-  def create_link(%{"slug" => slug} = attrs) do
-    attrs = Map.put(attrs, "slug", "localhost:4000/links/#{slug}")
+  def create_link(attrs) do
+    hostname = Application.get_env(:shortly, Shortly.Shortener)[:hostname]
+
+    attrs = Map.put(attrs, "hostname", hostname)
     %Link{}
     |> Link.changeset(attrs)
     |> Repo.insert()
@@ -110,7 +132,7 @@ defmodule Shortly.Shortener do
     Link.changeset(link, attrs)
   end
 
-  def generate_slug() do
+  defp generate_slug() do
     min = String.to_integer("100000", 36)
     max = String.to_integer("ZZZZZZ", 36)
   

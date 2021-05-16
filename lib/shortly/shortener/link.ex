@@ -5,6 +5,7 @@ defmodule Shortly.Shortener.Link do
   schema "links" do
     field :slug, :string
     field :url, :string
+    field :hostname, :string
 
     timestamps()
   end
@@ -12,8 +13,8 @@ defmodule Shortly.Shortener.Link do
   @doc false
   def changeset(link, attrs) do
     link
-    |> cast(attrs, [:url, :slug])
-    |> validate_required([:url, :slug])
+    |> cast(attrs, [:url, :slug, :hostname])
+    |> validate_required([:url, :slug, :hostname])
     |> unique_constraint(:slug)
     |> validate_length(:slug, min: 4)
   end

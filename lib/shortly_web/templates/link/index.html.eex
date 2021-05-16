@@ -18,7 +18,7 @@
 <%= for link <- @links do %>
     <tr>
       <td><%= link.url %></td>
-      <td><%= link.slug %></td>
+      <td><%= link.hostname <> link.slug %></td>
 
       <td>
         <button class="button"> Copy</button>
