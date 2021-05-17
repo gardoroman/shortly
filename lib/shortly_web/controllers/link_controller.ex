@@ -32,11 +32,11 @@ defmodule ShortlyWeb.LinkController do
   def show(conn, %{"slug" => slug}) do
     with(
       link <- Shortener.get_link(slug),
-      {:ok, url} <- Shortener.get_valid_url(link.url)
+      {:ok, url} <- Shortener.get_valid_url(link)
     ) do
       redirect(conn, external: url)
     else
-      {:eroor, error_info} -> 
+      {:error, error_info} -> 
       conn
       |> put_flash(:error, error_info)
       |> redirect(to: Routes.link_path(conn, :index))

@@ -40,8 +40,8 @@ defmodule Shortly.Shortener do
   def get_link(slug), do: Repo.get_by(Link, [slug: slug])
 
   def get_valid_url(nil), do: {:error, "Link not found."}
-  def get_valid_url(url) do
-    url = check_for_protocol(url)
+  def get_valid_url(link) do
+    url = check_for_protocol(link.url)
     {:ok, url}
   end
 
